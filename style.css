@@ -1,70 +1,5 @@
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-}
-
-h1 {
-    text-align: center;
-    color: #333;
-}
-
-.search-container {
-    text-align: center;
-    margin: 20px auto;
-    max-width: 400px;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.search-container label {
-    display: block;
-    font-weight: bold;
-}
-
-.search-container input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.search-container button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-}
-
-.search-container button:hover {
-    background-color: #0056b3;
-}
-
-#results {
-    max-width: 400px;
-    margin: 20px auto;
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-#results ul {
-    list-style: none;
-    padding: 0;
-}
-
-#results li {
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
 .navbar{
-    background-color: black;
+    background-color: #0077b6;
     color:white;
     display: flex;
     gap:10px;
@@ -73,6 +8,8 @@ h1 {
     padding-top:10px;
     padding-left: 8px;
     padding-bottom: 10px;
+    margin:0px 10px 0px 10px;
+    border-radius: 5px;
 }
 .navitems{
     display: flex;
@@ -84,3 +21,50 @@ h1 {
 .logo{
     padding-top: 7px;
 }
+
+button,input{
+    border-radius: 3px;
+    border: none;
+}
+
+/* Style for the card container */
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the card content */
+.card-content {
+    margin: 0;
+    padding: 0;
+}
+
+/* Style for the title */
+h2 {
+    font-size: 18px;
+    margin: 0;
+}
+
+/* Style for the author, unique ID, and gender */
+p {
+    margin: 5px 0;
+}
+
+
+/* Time taken */
+/* Style for the "Time Taken" section */
+#timeTaken {
+    font-size: 16px;
+    margin:0px 10px 0px 10px;
+}
+
+/* Style for the time value */
+.time {
+    font-weight: bold;
+    color: #0077b6; /* Change this color to your preferred color */
+}
+

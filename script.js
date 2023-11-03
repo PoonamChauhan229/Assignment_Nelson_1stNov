@@ -1,86 +1,162 @@
-let searchInProgress = false;
+// Usage example:
+const filePath = "./data.json";
+const jsonData = loadJSON(filePath);
+console.log(jsonData)
+console.log(jsonData.bookName.length)
 
-async function search() {
-    if (searchInProgress) {
-        return; // O(1) - Constant time check
-    }
 
-    searchInProgress = true; // O(1) - Constant time assignment
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase(); // O(1) - Constant time
+// Define the searchBooks function
+function searchBooks() {
+    // Get the user's search query and perform the search
+    const searchQuery = document.getElementById('searchInput').value;
+    console.log(searchQuery)
+    const resultsContainer = document.getElementById('results');
+    const timeTakenContainer = document.getElementById('timeTaken');
 
-    // Record the start time
-    const startTime = performance.now(); // O(1) - Constant time
+    // Perform the search logic based on the searchQuery
+    const searchResults = performSearch(searchQuery);
 
-    try {
-        const response = await fetch('https://api.nytimes.com/svc/books/v3/lists/overview.json?api-key=IGSqPAauZVbFQQB0249Oj4AVNIKHtaGZ'); // O(1) - Constant time
+    // Display search results
+    displayResults(searchResults, resultsContainer);
 
-        const data = await response.json(); // O(1) - Constant time
-        const booksList = data.results.lists; // O(N) - Linear time, where N is the number of lists
-        const allResults = []; // O(1) - Constant time
+    // Calculate and display the time taken (you can measure the time taken in your specific search logic)
+    const timeTaken = calculateTimeTaken(searchQuery);
+    timeTakenContainer.textContent = `Search completed in ${timeTaken.toFixed(2)} ms`;
+    timeTakenContainer.classList.add('time');
+}
 
-        for (const list of booksList) { // O(N) - Linear time
-            const books = list.books; // O(M) - Linear time, where M is the number of books in each list
-            const results = books.filter(book => { // O(M) - Linear time
-                return (
-                    book.title.toLowerCase().includes(searchTerm) || // O(1) - Constant time
-                    book.author.toLowerCase().includes(searchTerm) || // O(1) - Constant time
-                    book.primary_isbn13.toLowerCase() === searchTerm // O(1) - Constant time
-                );
-            });
+// Implement your search logic here
+function performSearch(searchQuery) {
+    // Create an array to store matching results
+    const results = [];
 
-            results.forEach(book => { // O(M) - Linear time
-                if (!allResults.some(b => b.title === book.title)) { // O(N * M) - Quadratic time
-                    allResults.push(book); // O(1) - Constant time
-                }
+    // Loop through your data arrays and check for matches
+    for (let i = 0; i < jsonData.bookName.length; i++) {
+        // Convert both the search query and the data to lowercase for case-insensitive search
+        const searchLower = searchQuery.toLowerCase();
+        const bookNameLower = jsonData.bookName[i].toLowerCase();
+        const firstNameLower = jsonData.firstName[i].toLowerCase();
+        const lastNameLower = jsonData.lastName[i].toLowerCase();
+        const guidLower = jsonData.guid[i].toLowerCase();
+
+        // Check if the search query matches any of the criteria
+        if (
+            bookNameLower.includes(searchLower) ||
+            firstNameLower.includes(searchLower) ||
+            lastNameLower.includes(searchLower) ||
+            guidLower.includes(searchLower)
+        ) {
+            // If there's a match, add the corresponding book to the results
+            results.push({
+                bookName: jsonData.bookName[i],
+                firstName: jsonData.firstName[i],
+                lastName: jsonData.lastName[i],
+                guid: jsonData.guid[i],
+                gender:jsonData.gender[i]
             });
         }
+    }
+    console.log(results)
+    return results;
+    
+}
 
-        if (allResults.length > 0) { // O(1) - Constant time
-            displayAllResults(allResults); // O(N * M) - Quadratic time
 
-            // Record the end time and calculate the elapsed time
-            const endTime = performance.now(); // O(1) - Constant time
-            const elapsedTime = endTime - startTime; // O(1) - Constant time
+//Function to display search results
+function displayResults(results, container) {
+    // Clear previous results
+    container.innerHTML = '';
 
-            // Display the time taken to the user
-            displayElapsedTime(elapsedTime); // O(1) - Constant time
-        } else {
-            displayNoResults(); // O(1) - Constant time
-        }
-    } catch (error) {
-        console.error('Error:', error); // O(1) - Constant time
-    } finally {
-        searchInProgress = false; // O(1) - Constant time
+    if (results.length === 0) {
+        container.innerHTML = '<p>No results found.</p>';
+    } else {
+        results.forEach(result => {
+            const card = document.createElement('div');
+            card.classList.add('card'); // Add a CSS class for styling
+
+            const cardContent = document.createElement('div');
+            cardContent.classList.add('card-content'); // Add a CSS class for styling
+
+            const title = document.createElement('h2');
+            title.textContent = result.bookName;
+
+            const author = document.createElement('p');
+            author.textContent = `Author: ${result.firstName} ${result.lastName}`;
+
+            const uniqueId = document.createElement('p');
+            uniqueId.textContent = `Unique ID: ${result.guid}`;
+
+            const gender = document.createElement('p');
+            gender.textContent = `Gender: ${result.gender}`;
+
+            cardContent.appendChild(title);
+            cardContent.appendChild(author);
+            cardContent.appendChild(uniqueId);
+            cardContent.appendChild(gender);
+
+            card.appendChild(cardContent);
+            container.appendChild(card);
+        });
     }
 }
 
-function displayElapsedTime(time) {
-    const timeDisplay = document.getElementById('timeTaken'); // O(1) - Constant time
-    timeDisplay.textContent = `Time taken: ${time.toFixed(2)} milliseconds`; // O(1) - Constant time
+
+
+// Function to display search results
+// function displayResults(results, container) {
+//     // Clear previous results
+//     container.innerHTML = '';
+
+//     if (results.length === 0) {
+//         container.innerHTML = '<p>No results found.</p>';
+//     } else {
+//         // Sort the results alphabetically by last name
+//         results.sort((a, b) => a.lastName.localeCompare(b.lastName));
+
+//         results.forEach(result => {
+//             const card = document.createElement('div');
+//             card.classList.add('card'); // Add a CSS class for styling
+
+//             const cardContent = document.createElement('div');
+//             cardContent.classList.add('card-content'); // Add a CSS class for styling
+
+//             const title = document.createElement('h2');
+//             title.textContent = result.bookName;
+
+//             const author = document.createElement('p');
+//             author.textContent = `Author: ${result.firstName} ${result.lastName}`;
+
+//             const uniqueId = document.createElement('p');
+//             uniqueId.textContent = `Unique ID: ${result.guid}`;
+
+//             const gender = document.createElement('p');
+//             gender.textContent = `Gender: ${result.gender}`;
+
+//             cardContent.appendChild(title);
+//             cardContent.appendChild(author);
+//             cardContent.appendChild(uniqueId);
+//             cardContent.appendChild(gender);
+
+//             card.appendChild(cardContent);
+//             container.appendChild(card);
+//         });
+//     }
+// }
+
+
+// Function to measure time taken (you can implement this according to your needs)
+function calculateTimeTaken(searchQuery) {
+    // Measure the time taken for the search operation
+    const startTime = performance.now();
+
+    // Your search logic here, based on the provided searchQuery
+    const searchResults = performSearch(searchQuery);
+
+    const endTime = performance.now();
+    const timeTaken = endTime - startTime;
+
+    return timeTaken;
 }
 
-function displayAllResults(allResults) {
-    const resultsDiv = document.getElementById('results'); // O(1) - Constant time
-    resultsDiv.innerHTML = ''; // O(1) - Constant time
 
-    allResults.map(result => { // O(N * M) - Quadratic time
-        const listContainer = document.createElement('div'); // O(1) - Constant time
-        listContainer.innerHTML = `<h3>Books List</h3>`; // O(1) - Constant time
 
-        const ul = document.createElement('ul'); // O(1) - Constant time
-        const li = document.createElement('li'); // O(1) - Constant time
-        li.innerHTML = `<strong>${result.title}</strong><br>
-            <img src="${result.book_image}" height="200px" width="300px"/><br>
-            Author: ${result.author}<br>Description: ${result.description}<br>
-            ISBN: ${result.primary_isbn13}>` // O(1) - Constant time
-        ul.appendChild(li); // O(1) - Constant time
-
-        listContainer.appendChild(ul); // O(1) - Constant time
-        resultsDiv.appendChild(listContainer); // O(1) - Constant time
-    });
-}
-
-function displayNoResults() {
-    const resultsDiv = document.getElementById('results'); // O(1) - Constant time
-    resultsDiv.innerHTML = 'No results found in any of the lists.'; // O(1) - Constant time
-}
