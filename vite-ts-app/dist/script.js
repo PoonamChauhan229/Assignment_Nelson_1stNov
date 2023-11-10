@@ -1,6 +1,7 @@
 const data = loadJSON('../DO_NOT_TOUCH/data.json'); //Don't delete this line. All your data is here. It does take a few seconds for Replit to load the data because it's so large.
 console.log(data);
 
+
 function searchBooks() {
     // Get the user's search query and perform the search
     const searchQuery = document.getElementById('searchInput').value;
@@ -10,6 +11,7 @@ function searchBooks() {
 
     // Perform the search logic based on the searchQuery
     const searchResults = performSearch(searchQuery);
+    console.log(searchResults)
 
     // Display search results
     displayResults(searchResults, resultsContainer);
@@ -29,6 +31,7 @@ function performSearch(searchQuery) {
     for (let i = 0; i < data.bookName.length; i++) {
         // Convert both the search query and the data to lowercase for case-insensitive search
         const searchLower = searchQuery.toLowerCase();
+        // console.log(searchLower)
         const bookNameLower = data.bookName[i].toLowerCase();
         const firstNameLower = data.firstName[i].toLowerCase();
         const lastNameLower = data.lastName[i].toLowerCase();
@@ -58,6 +61,7 @@ function performSearch(searchQuery) {
 
 // Function to display search results
 function displayResults(results, container) {
+    //container=>resultconatiner
     // Clear previous results
     container.innerHTML = '';
 
@@ -104,10 +108,75 @@ function calculateTimeTaken(searchQuery) {
     const startTime = performance.now();
 
     // Your search logic here, based on the provided searchQuery
-    const searchResults = performSearch(searchQuery);
+   performSearch(searchQuery);
 
     const endTime = performance.now();
     const timeTaken = endTime - startTime;
 
     return timeTaken;
 }
+
+function bookList() {
+    // Create an array to store matching results
+    const booklistresults = [];
+
+    // Loop through your data arrays and check for matches
+    // for (let i = 0; i < data.bookName.length; i++) { 
+        for (let i = 0; i < 10; i++) {        
+        
+            booklistresults.push({
+                bookName: data.bookName[i],
+                firstName: data.firstName[i],
+                lastName: data.lastName[i],
+                guid: data.guid[i],
+                gender:data.gender[i]
+            });
+        
+    }
+    console.log(booklistresults)
+    return booklistresults;
+    
+}
+
+function displayTable(booklistresult, container) {
+    // Clear previous results
+    container.innerHTML = '';
+    searchQuery.value=""
+   
+
+    if (booklistresult.length === 0) {
+        container.innerHTML = '<p>No results found.</p>';
+    } else {
+        const table = document.createElement('table');
+        table.classList.add('table'); // Add a CSS class for styling
+
+        const tableHeader = table.createTHead();
+        const headerRow = tableHeader.insertRow(0);
+        headerRow.innerHTML = `
+                                <th>Book Name</th>
+                                <th>Author</th>
+                                <th>Unique ID</th>
+                                <th>Gender</th>
+                                `;
+
+        const tableBody = table.createTBody();
+        booklistresult.forEach(result => {
+            const row = tableBody.insertRow();
+            row.innerHTML = `<td>${result.bookName}</td><td>${result.firstName} ${result.lastName}</td><td>${result.guid}</td><td>${result.gender}</td>`;
+        });
+
+        container.appendChild(table);
+    }
+}
+
+function showBookList() {
+    const booklistresult = bookList();
+    const resultsContainer = document.getElementById('results');
+    displayTable(booklistresult, resultsContainer);
+}
+
+
+
+
+
+

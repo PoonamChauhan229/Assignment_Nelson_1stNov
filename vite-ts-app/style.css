@@ -67,3 +67,24 @@ p {
   font-weight: bold;
   color: #0077b6; /* Change this color to your preferred color */
 }
+
+/* Styling for the table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table th, .table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+/* Even and odd row background colors for better readability */
+.table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.table tr:nth-child(odd) {
+  background-color: #fff;
+}
