@@ -170,6 +170,7 @@ function displayTable(booklistresult, container) {
 }
 
 function showBookList() {
+    document.getElementById('searchInput').value="";
     const booklistresult = bookList();
     const resultsContainer = document.getElementById('results');
     displayTable(booklistresult, resultsContainer);
