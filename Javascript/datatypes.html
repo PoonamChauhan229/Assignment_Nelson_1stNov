@@ -74,6 +74,7 @@
         // arr[index]
         // arr[0]//3
         // arr[1]//4
+        //element=>index numbers
 
         console.log(arr[0])
         console.log(arr[4])
@@ -85,6 +86,87 @@
 
         console.log(arr.length)
         console.log(arr)
+
+
+        // Object
+        //{}
+        //key:value pair
+        //seprated by commas
+        //{key:value,key1:value1,....so on....}
+
+        // example
+        var obj={
+            name:"Harish",
+            age:14,
+            school:"abc"
+            }
+        
+        console.log(obj)
+        // access the object values
+        // dot operator .
+        console.log(obj.name)
+        console.log(obj.age)
+        console.log(obj.school)
+
+        // example
+        var obj1={
+                name:"abc",
+                enrolled:"JS",
+                marks_scored:70
+            }
+        // JS
+
+        console.log(obj1.enrolled)//JS
+        //70
+        console.log(obj1.marks_scored)
+
+        
+        //if any want to want to add up.
+        obj1.location="India"
+        console.log(obj1)
+
+        //update our obj
+        obj1.name="Harish"
+        console.log(obj1)
+
+
+        //if a key is prseent it will update
+        //if a key not present it will add and then update.
+
+        // array of objects
+        // [
+        //     {},
+        //     {},
+        //     {}
+        // ]
+
+        // ropu of students
+       var newarr= [
+            {name:"ABC",age:25},
+            {name:"XYZ",age:35},
+            {name:"PQR",age:85},
+        ]
+        console.log(newarr)
+        //XYZ
+        console.log(newarr.name)//undefined
+
+        // []=>{}=>array of objects
+        //object from the array
+        console.log(newarr[1])
+        console.log(newarr[1].name)
+
+        //85
+        console.log(newarr[2].age)
+        
+
+
+
+
+
+
+
+
+
     </script>
 </body>
 </html>
