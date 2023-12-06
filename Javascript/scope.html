@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // sscope
+        // block scope
+        let b=80; //global scope
+        {
+            let a =50; //local scope
+            console.log(b)
+        }       
+        console.log(b)
+        // console.log(a)
+
+        // const
+
+        const d=180; //global scope
+        {
+            const e =50; //local scope
+            console.log(d)
+            console.log(e)
+        }
+       
+        console.log(d)
+        // console.log(e)
+
+
+        var g=180; //global scope
+        {
+            var t =50; //global scope
+            console.log(g)
+            console.log(t)
+        }       
+        console.log(g)
+        console.log(t)
+
+        //functional scope -- doesnt have normal scope
+        function abc(){
+            var j=100;//local variable
+            console.log(j)
+        }
+        abc()
+        // console.log(j)
+
+        // example
+        {
+            let x=20;
+            {
+                const  y=40;
+                {
+                    var u=90;
+                }
+                console.log(y)//40
+            }
+           console.log(x)//20
+        }
+        //console.log(x,y,u)//error
+       // console.log(x)//error
+        // console.log(y)//error
+        console.log(u)//90
+
+
+    </script>
+</body>
+</html>
