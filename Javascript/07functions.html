@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // functions
+
+        //functions heart of JS
+
+        // do 10 times .console.log(2+2);
+        for(var i=1;i<=10;i++){
+            console.log(2+2);
+        }
+        //syntax
+        // 3-4 types
+
+        // function functionName(){
+        //    // block of code
+        // }
+        // // execution
+        // //call the function|| invoking a function
+        // functionName()
+
+        // add example=>2+2
+
+        function add(){
+            console.log(2+2);
+        }
+        add() //harish => 2+2
+        add() // poonam => 3+9
+        add() // harish =>3+8
+
+        // subtraction and call that function 5 times
+
+        function subtraction(){
+            console.log(20-5)
+        }
+        subtraction() //2-5
+        subtraction() //4-5
+
+        // with parameter
+        //arguments
+
+        // function functionName(param1,param2){
+        //     //block of code
+        // }
+        // functionName(arg1,arg2)//arguments
+
+        function addition(a,b,c){
+           console.log(a,b,c)
+           console.log(a+b+c)
+        }
+        addition(3,5,8)
+        // a=3, b=5, c=8 
+        //3+5+8
+        //6+7+7
+        addition(6,7,7)
+        addition(10,7,9)
+
+        // mutilplication 
+
+        // celsius to Kelvin
+        // celsius+273.15
+
+        function toKelvin(temp){
+            // console.log(temp+273.15)
+            let k=temp+273.15
+            console.log(k)
+        }
+        toKelvin(10)
+        toKelvin(45)
+        
+        // calculate the square of any number
+
+        function square(x){
+            console.log(x*x)
+        }
+        square(2)
+        square(6)
+        square(7)
+        square(8)
+        square(9)
+    </script>
+</body>
+</html>
