@@ -84,6 +84,84 @@
         square(7)
         square(8)
         square(9)
+        console.log(square(1))
+
+        //function with return keyword
+
+        function test(){
+          
+            console.log("17")// debugging the things
+            return 100
+        }
+        // test()
+        console.log(test())
+
+        //function with params
+
+        function test1(x){
+            return x*x
+        }
+       console.log(test1(3))
+       var a=test1(6)
+       console.log(a)
+
+       var b=100;
+       console.log(a+b)//136
+
+    //    e+s+h
+    //80+89+90=>scored marks
+    //100+100+100=>total marks
+    // return => cal % 
+
+    // function=> return total scored marks
+    // function you will using scored to calculate %=> normal function
+
+    function total(e,s,h){
+        return e+s+h
+    }
+    var sum=total(80,89,90)
+    console.log(sum)
+
+    function percentage(x){
+        // console.log(x)
+        var per=(x/300)*100
+        console.log("Percentage is",per)
+    }
+    percentage(sum)
+
+
+// 
+
+    var arr=[12,22,32,42,52]
+
+    // o/p=>
+    // 1
+    // 2
+    // 3
+    // 4
+    // 5
+    function print(x){
+        console.log(x)
+        for(var i=0;i<x.length;i++){
+            console.log(x[i])
+        }
+    }
+    print(arr)//values==arguments
+
+    // Print sum of all the elements of the array using the function
+    var arr=[12,22,32,42,52]
+    // 12+22+32+42+52
+    //o/p=>160
+
+    // Print Even or Odd for any given number using the function
+    // 6=>even
+    // 7=>odd
+
+    // Logic
+    //Maths
+    //when a num even and when a num is odd
+    //if else
+
     </script>
 </body>
 </html>
