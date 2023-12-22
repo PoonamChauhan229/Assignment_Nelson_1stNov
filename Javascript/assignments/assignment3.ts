@@ -1,5 +1,5 @@
 class Platform {
-    title: string;// platform
+    title: string;
     videos: Video[];
   
     constructor(title: string) {
@@ -16,7 +16,9 @@ class Platform {
         throw new Error(`The video must be on ${this.title} platform.`);
       }
   
-      this.videos.push(video);
+      if (!this.videos.some(existingVideo => existingVideo.title === video.title)) {
+        this.videos.push(video);
+      }
     }
   
     createVideo(title: string, length: number, format: 'movie' | 'show'): void {
