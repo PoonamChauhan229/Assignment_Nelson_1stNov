@@ -1,5 +1,5 @@
 class Platform {
-    title: string;
+    title: string;// platform
     videos: Video[];
   
     constructor(title: string) {
