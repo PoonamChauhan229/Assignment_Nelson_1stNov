@@ -69,3 +69,5 @@ class Video {
   video.removePlatform('Netflix');
   console.log(video.platforms); // Output: ['YouTube', 'Prime Videos']
   
+
+  
