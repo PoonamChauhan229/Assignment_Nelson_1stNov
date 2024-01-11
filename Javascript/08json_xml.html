@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // JSON data
+        //Javascript Object Notataion
+        var obj={
+            name:"abc",
+            age:34
+        }
+
+        var jsonobj={
+            'name':'abc',
+            'age':34
+        }
+        //
+        // JSON
+        //intersct with the server
+        // JSON.stringify=> obj into string
+        //JSON.parse=> string to obj
+
+        console.log(JSON.stringify(obj))// send to server
+ 
+        console.log(JSON.parse('{"name":"abc","age":34}'))
+    </script>
+</body>
+</html>
