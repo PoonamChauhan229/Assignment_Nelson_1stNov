@@ -1,107 +1,93 @@
 import * as readline from 'readline';
 
-enum Choice {
-  Rock = 'rock',
-  Paper = 'paper',
-  Scissors = 'scissors',
+class Animal {
+  species: string;
+  attackPower: number;
+  defensePower: number;
+  healthPoints: number;
+
+  constructor(species: string, attackPower: number, defensePower: number, healthPoints: number) {
+    this.species = species;
+    this.attackPower = attackPower;
+    this.defensePower = defensePower;
+    this.healthPoints = healthPoints;
+  }
+
+  attack(enemy: Animal): number {
+    const minDamage = this.attackPower / 10;
+    const maxDamage = (this.attackPower * 2);
+    const actualDamage = Math.floor(Math.random() * (maxDamage - minDamage + 1)) + minDamage;
+    enemy.healthPoints -= actualDamage;
+    return actualDamage;
+  }
+
+  isDead(): boolean {
+    return this.healthPoints <= 0;
+  }
 }
 
-interface Score {
-  wins: number;
-  losses: number;
-  ties: number;
+function battle(animal1: Animal, animal2: Animal): void {
+  let round = 1;
+
+  while (!animal1.isDead() && !animal2.isDead()) {
+    console.log(`==============`);
+    console.log(`Round ${round}`);
+
+    const animal1Damage = animal1.attack(animal2);
+    console.log(`${animal1.species} did ${animal1Damage} damage to ${animal2.species}!`);
+    console.log(`${animal2.species} now has ${animal2.healthPoints} HP.`);
+
+    const animal2Damage = animal2.attack(animal1);
+    console.log(`${animal2.species} did ${animal2Damage} damage to ${animal1.species}!`);
+    console.log(`${animal1.species} now has ${animal1.healthPoints} HP.`);
+
+    round++;
+  }
+
+  console.log(`==============`);
+  if (animal1.isDead()) {
+    console.log(`${animal2.species} has won!`);
+  } else {
+    console.log(`${animal1.species} has won!`);
+  }
 }
 
-const getEnumValues = <T extends Record<string, string>>(enumObj: T): Array<T[keyof T]> => {
-  return Object.keys(enumObj).map(key => enumObj[key as keyof T]);
-};
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
-const isValidChoice = (input: string): input is Choice => {
-  return getEnumValues(Choice).includes(input as Choice);
-};
+async function getUserAnimalInput(promptMessage: string): Promise<Animal> {
+  let species: string;
+  while (true) {
+    species = await getUserInput(promptMessage);
+    if (["bull", "tiger", "eagle"].includes(species.toLowerCase())) {
+      break;
+    } else {
+      console.log("Invalid animal name. Please choose from bull, tiger, or eagle.");
+    }
+  }
 
-const getRandomChoice = (): Choice => {
-  const choices = getEnumValues(Choice);
-  const randomIndex = Math.floor(Math.random() * choices.length);
-  return choices[randomIndex];
-};
+  return new Animal(species, 50, 30, 200);
+}
 
-const getUserChoice = async (): Promise<Choice | 'exit'> => {
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
-
-  return new Promise<Choice | 'exit'>((resolve) => {
-    rl.question('Enter your choice (rock, paper, scissors, or exit): ', (userChoiceInput) => {
-      rl.close();
-
-      if (!userChoiceInput) {
-        resolve('exit');
-        return;
-      }
-
-      const normalizedInput = userChoiceInput.toLowerCase();
-      if (normalizedInput === 'exit') {
-        resolve('exit');
-      } else if (isValidChoice(normalizedInput)) {
-        resolve(normalizedInput as Choice);
-      } else {
-        console.log('Invalid input. Please choose rock, paper, or scissors.');
-        resolve(getUserChoice());
-      }
+function getUserInput(promptMessage: string): Promise<string> {
+  return new Promise((resolve) => {
+    rl.question(promptMessage, (answer) => {
+      resolve(answer);
     });
   });
-};
+}
 
-const playRound = (userChoice: Choice, computerChoice: Choice): string => {
-  if (userChoice === computerChoice) {
-    return 'It\'s a tie!';
-  }
+async function startBattle() {
+  console.log("Welcome to animal battle! You can choose two animals to fight each other. The options are bull, tiger, and eagle.");
 
-  if (
-    (userChoice === Choice.Rock && computerChoice === Choice.Scissors) ||
-    (userChoice === Choice.Paper && computerChoice === Choice.Rock) ||
-    (userChoice === Choice.Scissors && computerChoice === Choice.Paper)
-  ) {
-    return 'You win!';
-  }
+  const animal1 = await getUserAnimalInput("What is the first animal? ");
+  const animal2 = await getUserAnimalInput("What is the second animal? ");
 
-  return 'You lose!';
-};
+  battle(animal1, animal2);
 
-const playGame = async (): Promise<void> => {
-  let score: Score = { wins: 0, losses: 0, ties: 0 };
-  let cheatingEnabled = false;
+  rl.close();
+}
 
-  while (score.losses < 10) {
-    const userChoice = await getUserChoice();
-
-    if (userChoice === 'exit') {
-      break;
-    }
-
-    const computerChoice: Choice = cheatingEnabled && Math.random() < 0.25
-      ? getRandomChoice()
-      : getRandomChoice();
-
-    console.log(`Computer chose: ${computerChoice}`);
-    const result = playRound(userChoice, computerChoice);
-
-    if (result === 'You lose!') {
-      score.losses++;
-    } else if (result === 'You win!') {
-      score.wins++;
-    } else {
-      score.ties++;
-    }
-
-    console.log(`Score - Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`);
-  }
-
-  
-  console.log('Game over. Thanks for playing!');
-};
-
-playGame();
-// npm i --save-dev @types/node
+startBattle();
