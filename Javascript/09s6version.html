@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // varailes
+        var name="harish"
+        var cousre="Javascript"
+        var year=2024
+
+        //create an object
+        var obj={
+            name:"harish",
+            cousre:"Javascript",
+            year:2024
+        }
+        console.log(obj)
+        
+        var obj1={
+            name:name,
+            cousre:cousre,
+            year:year
+        }
+        console.log(obj1)
+//es6
+
+            //key and value is same , no need to repeat it
+        var obj2={name,cousre,year}
+        console.log(obj2)
+
+
+        // desctructing concept.
+        //unpacking the elements
+        //unpacking
+        
+        const arr=[3,4,5,6]
+        arr[0]
+        arr[1]
+
+        console.log(arr[0])//3
+
+        const [num1,num2,num3,firstname]=arr
+        console.log(num1)
+
+        console.log(num2)
+        console.log(firstname)
+
+        const obj3={
+            movie:"Alexandar",
+            launchyear:"2024",
+            actor:"XYZ",
+            actress:"ABC"
+        }
+        console.log(obj3.movie)
+        console.log(obj3.actor)
+
+        const {movie,launchyear,actor,actress}=obj3
+        console.log(movie)
+        console.log(launchyear)
+
+    </script>
+</body>
+</html>
