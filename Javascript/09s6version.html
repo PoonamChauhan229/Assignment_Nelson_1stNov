@@ -84,7 +84,34 @@
         //3,4,5=12
 
 
+        // spread operator
+        // ...
+        // unpackaging
 
+        function largestElement(arr) {
+            console.log(arr)
+            let largestNum = arr[0];//5
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i] > largestNum) { //5>5==false 6>5=true 7>6  8>7
+                    largestNum = arr[i]; //largesnum=5/6  7 8
+                    console.log("largestnum",largestNum)
+                }
+            }
+            console.log("The largest element in the array is:" + largestNum);
+        }
+        largestElement([5,6,7,8,9]);
+
+        var arr1=[5,6,7,8,9]        
+        console.log(arr1)
+        console.log(...arr1) // 5 6 7 8 9
+        // Maximum/ mininum from the above array
+        // 9 max
+        //5 min
+
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math
+
+        console.log(Math.max(5,6,7,8,9))
+        console.log(Math.max(...arr1))//spread
     </script>
 </body>
 </html>
