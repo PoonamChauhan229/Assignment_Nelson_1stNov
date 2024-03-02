@@ -29,6 +29,81 @@
         let arr5=arr.map((element,index)=>element*2+index)
         console.log(arr5)
         //Filter Method
+
+
+
+        const array1 = [10, 20, 40, 80];
+        // >single value
+        //1+2+3+4
+        //reduce method()
+        //acc+cv=>
+        //acc=> accumulator=> sum 
+        console.log("REDUCE METHOD")
+        let res56=array1.reduce((acc,cv)=> acc+cv)
+        console.log(res56)
+
+        let res57=array1.reduce((acc,cv)=> acc+cv,100)
+        console.log(res57)
+
+       
+//         acc=>10
+//         cv=>20
+// _____________
+//         acc=30
+//         cv=40
+
+//         _____________
+//         acc=70
+//         cv=80
+//         _____________
+//         acc=150
+
+
+        let stuarray=[
+            {
+                marks:90,
+                name:"BOB"
+            },
+            {
+                marks:70,
+                name:"KARL"
+            },
+            {
+                marks:60,
+                name:"JOHN"
+            },
+        ]
+        console.log(stuarray[1].marks)
+
+        // add all the marks
+
+        let res67=stuarray.reduce((acc,cv)=>acc+cv.marks,0)//acc={}
+        console.log(res67)
+
+       var res105= [15, 16, 17, 18, 19].reduce((acc, cv) => acc + cv,10);
+        console.log(res105)
+
+
+        //array.fill()
+        //lentgh
+        let arr45=[19,29,39,49,59]
+        console.log(arr45)
+        
+        // update value (700)||start index num (4)
+        let x1=arr45.fill(700,4)
+        console.log(x1) 
+
+        // update value (78)||start index num (3)|| end count (lenght)num (4)
+        let x2=arr45.fill(78,3,5)
+        console.log(x2) 
+
+        //update value (7)
+        let x3=arr45.fill(7)
+        console.log(x3)
+
+        console.log(Array(5).fill(10))
+
+        console.log([1,2,3].fill(4,2))
     </script>
 </body>
 </html>
